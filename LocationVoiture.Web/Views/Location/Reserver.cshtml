@@ -1,0 +1,45 @@
+﻿@model LocationVoiture.Core.Models.Location
+@{
+    ViewData["Title"] = "Réserver un véhicule";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h3>Réservation : @Model.VoitureModele</h3>
+                </div>
+                <div class="card-body">
+
+                    @if (ViewBag.Erreur != null)
+                    {
+                        <div class="alert alert-danger">@ViewBag.Erreur</div>
+                    }
+
+                    <form asp-action="ValiderReservation" method="post">
+                        <input type="hidden" asp-for="VoitureId" />
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label>Date de début</label>
+                                <input asp-for="DateDebut" type="date" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Date de fin</label>
+                                <input asp-for="DateFin" type="date" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info mt-3">
+                            <strong>Note :</strong> Le prix total sera calculé automatiquement lors de la validation.
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100 py-2 fw-bold">Confirmer la demande</button>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary w-100 mt-2">Annuler</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Confirmation";
+}
+
+<div class="text-center mt-5">
+    <h1 class="text-success display-1">✅</h1>
+    <h2 class="text-success">Demande envoyée avec succès !</h2>
+    <p class="lead">Votre demande est en cours de traitement par notre équipe.</p>
+    <p>Vous recevrez votre bon de réservation une fois la demande validée.</p>
+
+    <div class="mt-4">
+        <a asp-controller="Location" asp-action="MesReservations" class="btn btn-primary">Voir mes réservations</a>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Retour à l'accueil</a>
+    </div>
+</div>

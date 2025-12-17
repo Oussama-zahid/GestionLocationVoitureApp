@@ -1,0 +1,76 @@
+﻿<Window x:Class="LocationVoiture.WPF.AjoutVoitureWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Nouvelle Voiture" Height="550" Width="400" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+            <Grid Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <Label Content="Marque :"/>
+                    <TextBox x:Name="txtMarque"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <Label Content="Modèle :"/>
+                    <TextBox x:Name="txtModele"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <Label Content="Année :"/>
+                    <TextBox x:Name="txtAnnee"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <Label Content="Prix par jour (DH) :"/>
+                    <TextBox x:Name="txtPrix"/>
+                </StackPanel>
+            </Grid>
+
+            <Label Content="Immatriculation :"/>
+            <TextBox x:Name="txtImmat" Margin="0,0,0,10"/>
+
+            <Label Content="Carburant :"/>
+            <ComboBox x:Name="cbCarburant" Margin="0,0,0,10">
+                <ComboBoxItem Content="Diesel" IsSelected="True"/>
+                <ComboBoxItem Content="Essence"/>
+                <ComboBoxItem Content="Hybride"/>
+                <ComboBoxItem Content="Electrique"/>
+            </ComboBox>
+
+            <Label Content="Transmission :"/>
+            <ComboBox x:Name="cbTransmission" Margin="0,0,0,10">
+                <ComboBoxItem Content="Manuelle" IsSelected="True"/>
+                <ComboBoxItem Content="Automatique"/>
+            </ComboBox>
+
+            <Label Content="Image de la voiture :"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <Button Content="Choisir une image..." Click="btnImage_Click" Width="120"/>
+                <TextBlock x:Name="txtImageChemin" Text="Aucune image sélectionnée" 
+                           VerticalAlignment="Center" Margin="10,0,0,0" FontStyle="Italic" Foreground="Gray"/>
+            </StackPanel>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Annuler" Click="btnAnnuler_Click" Margin="0,0,5,0" Height="35"/>
+                <Button Content="Enregistrer" Grid.Column="1" Click="btnEnregistrer_Click" 
+                        Margin="5,0,0,0" Height="35" Background="#4CAF50" Foreground="White" FontWeight="Bold"/>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

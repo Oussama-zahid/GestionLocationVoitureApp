@@ -1,0 +1,89 @@
+﻿<Window x:Class="LocationVoiture.WPF.DashboardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Tableau de Bord Avancé" Height="550" Width="1000" WindowStartupLocation="CenterScreen"
+        Background="#F5F5F5">
+
+    <Window.Resources>
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.2" Color="Black"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CardTitle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Opacity" Value="0.9"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+        <Style x:Key="CardValue" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="42"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="📊 Tableau de Bord Stratégique" FontSize="26" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center"/>
+            <TextBlock Text="Vue d'ensemble de l'activité" FontSize="14" Foreground="Gray" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <UniformGrid Grid.Row="1" Rows="2" Columns="3" Margin="0">
+
+            <Border Background="#2196F3" Style="{StaticResource CardStyle}">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="🚗 Total Voitures" Style="{StaticResource CardTitle}"/>
+                    <TextBlock x:Name="txtNbVoitures" Text="0" Style="{StaticResource CardValue}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="#00BCD4" Style="{StaticResource CardStyle}">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="✅ Disponibles" Style="{StaticResource CardTitle}"/>
+                    <TextBlock x:Name="txtDisponibles" Text="0" Style="{StaticResource CardValue}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="#FF9800" Style="{StaticResource CardStyle}">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="🔑 Actuellement Louées" Style="{StaticResource CardTitle}"/>
+                    <TextBlock x:Name="txtLouees" Text="0" Style="{StaticResource CardValue}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="#F44336" Style="{StaticResource CardStyle}">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="🔧 En Entretien" Style="{StaticResource CardTitle}"/>
+                    <TextBlock x:Name="txtEntretien" Text="0" Style="{StaticResource CardValue}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="#9C27B0" Style="{StaticResource CardStyle}">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="⏳ Demandes en Attente" Style="{StaticResource CardTitle}"/>
+                    <TextBlock x:Name="txtAttente" Text="0" Style="{StaticResource CardValue}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="#4CAF50" Style="{StaticResource CardStyle}">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="💰 Chiffre d'Affaires" Style="{StaticResource CardTitle}"/>
+                    <TextBlock x:Name="txtChiffreAffaires" Text="0 DH" Style="{StaticResource CardValue}" FontSize="36"/>
+                </StackPanel>
+            </Border>
+
+        </UniformGrid>
+    </Grid>
+</Window>

@@ -1,0 +1,50 @@
+﻿@model List<LocationVoiture.Core.Models.Location>
+@{
+    ViewData["Title"] = "Historique";
+}
+
+<h2 class="mb-4">Mes Réservations</h2>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Voiture</th>
+            <th>Du</th>
+            <th>Au</th>
+            <th>Prix Total</th>
+            <th>Statut</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loc in Model)
+        {
+            <tr>
+                <td>@loc.VoitureModele</td>
+                <td>@loc.DateDebut.ToShortDateString()</td>
+                <td>@loc.DateFin.ToShortDateString()</td>
+                <td class="fw-bold">@loc.PrixTotal DH</td>
+                <td>
+                    @if (loc.Statut == "En attente")
+                    {
+                        <span class="badge bg-warning text-dark">En attente</span>
+                    }
+                    else if (loc.Statut == "Active")
+                    {
+
+                        <span class="badge bg-success">Validée</span>
+                    }
+                    else if (loc.Statut == "Annulee")
+                    {
+
+                        <span class="badge bg-danger">Refusée</span>
+                    }
+                    else
+                    {
+
+                        <span class="badge bg-secondary">@loc.Statut</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

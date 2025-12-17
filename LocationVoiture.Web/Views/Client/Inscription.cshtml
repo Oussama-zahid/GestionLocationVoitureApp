@@ -1,0 +1,57 @@
+﻿@model LocationVoiture.Core.Models.Client
+@{
+    ViewData["Title"] = "Inscription";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4>Créer un compte</h4>
+            </div>
+            <div class="card-body">
+                @if (ViewBag.Erreur != null)
+                {
+                    <div class="alert alert-danger">@ViewBag.Erreur</div>
+                }
+
+                <form asp-action="Inscription" method="post">
+                    <div class="mb-3">
+                        <label>Nom</label>
+                        <input asp-for="Nom" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label>Prénom</label>
+                        <input asp-for="Prenom" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input asp-for="Email" type="email" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label>Mot de passe</label>
+                        <input asp-for="MotDePasse" type="password" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label>Confirmer le mot de passe</label>
+                        <input name="MotDePasseConfirmation" type="password" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label>N° Permis</label>
+                        <input asp-for="NumeroPermis" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label>Téléphone</label>
+                        <input asp-for="Telephone" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label>Adresse</label>
+                        <textarea asp-for="Adresse" class="form-control"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">S'inscrire</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
