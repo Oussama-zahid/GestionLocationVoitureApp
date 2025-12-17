@@ -16,14 +16,44 @@ namespace LocationVoiture.Web.Controllers
             _voitureRepo = new VoitureRepository();
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string recherche, string tri, int page = 1)
         {
-            // Récupérer toutes les voitures
-            var voitures = _voitureRepo.GetAll();
+            int taillePage = 6; // Nombre de voitures par page
+            var voitures = _voitureRepo.GetAll(); // Récupère tout (idéalement, faites le filtre en SQL, mais ça ira pour l'instant)
 
-            // On ne veut afficher que les voitures "Disponibles" ou "Louées" (pas celles en Entretien)
-            // Et on peut filtrer côté code si besoin. Pour l'instant, on envoie tout.
-            return View(voitures);
+            // 1. RECHERCHE
+            if (!string.IsNullOrEmpty(recherche))
+            {
+                recherche = recherche.ToLower();
+                voitures = voitures.Where(v => v.Marque.ToLower().Contains(recherche) ||
+                                               v.Modele.ToLower().Contains(recherche)).ToList();
+            }
+
+            // 2. TRI
+            switch (tri)
+            {
+                case "prix_croissant":
+                    voitures = voitures.OrderBy(v => v.PrixParJour).ToList();
+                    break;
+                case "prix_decroissant":
+                    voitures = voitures.OrderByDescending(v => v.PrixParJour).ToList();
+                    break;
+                default: // Par défaut : les plus récentes
+                    voitures = voitures.OrderByDescending(v => v.Id).ToList();
+                    break;
+            }
+
+            // 3. PAGINATION
+            int totalVoitures = voitures.Count();
+            var voituresAffichees = voitures.Skip((page - 1) * taillePage).Take(taillePage).ToList();
+
+            // On passe les infos à la Vue via ViewBag pour gérer les boutons Suivant/Précédent
+            ViewBag.PageActuelle = page;
+            ViewBag.TotalPages = (int)Math.Ceiling((double)totalVoitures / taillePage);
+            ViewBag.RechercheActuelle = recherche; // Pour garder le texte dans la barre
+            ViewBag.TriActuel = tri; // Pour garder le tri sélectionné
+
+            return View(voituresAffichees);
         }
 
         public IActionResult Privacy()

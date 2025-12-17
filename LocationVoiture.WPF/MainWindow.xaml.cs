@@ -12,6 +12,7 @@ namespace LocationVoiture.WPF
     {
         // Instance de notre Repository pour parler à SQL Server
         private VoitureRepository _repo = new VoitureRepository();
+        private List<Voiture> _listeCompleteVoitures;
 
         public MainWindow()
         {
@@ -25,6 +26,7 @@ namespace LocationVoiture.WPF
             try
             {
                 List<Voiture> voitures = _repo.GetAll();
+                _listeCompleteVoitures = voitures;
                 dgVoitures.ItemsSource = voitures; // Liaison de données (Data Binding)
             }
             catch (Exception ex)
@@ -222,6 +224,22 @@ namespace LocationVoiture.WPF
 
             // Quand on revient de l'entretien, on met à jour les listes
             ChargerDonnees();
+        }
+        private void txtRecherche_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            string motCle = txtRecherche.Text.ToLower();
+
+            if (_listeCompleteVoitures != null)
+            {
+                // On filtre la liste en mémoire (LINQ)
+                var listeFiltree = _listeCompleteVoitures.Where(v =>
+                    v.Marque.ToLower().Contains(motCle) ||
+                    v.Modele.ToLower().Contains(motCle) ||
+                    v.Immatriculation.ToLower().Contains(motCle)
+                ).ToList();
+
+                dgVoitures.ItemsSource = listeFiltree;
+            }
         }
     }
 }

@@ -1,4 +1,24 @@
-﻿@model List<LocationVoiture.Core.Models.Voiture>
+﻿<form method="get" asp-action="Index" class="mb-4">
+    <div class="row g-2">
+        <div class="col-md-4">
+            <input type="text" name="recherche" class="form-control" placeholder="Marque ou modèle..." value="@ViewBag.RechercheActuelle" />
+        </div>
+        <div class="col-md-3">
+            <select name="tri" class="form-select" onchange="this.form.submit()">
+                <option value="">-- Trier par --</option>
+                <option value="prix_croissant">Prix : Moins cher</option>
+                <option value="prix_decroissant">Prix : Plus cher</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Filtrer</button>
+        </div>
+        <div class="col-md-2">
+            <a asp-action="Index" class="btn btn-outline-secondary w-100">Réinitialiser</a>
+        </div>
+    </div>
+</form>
+@model List<LocationVoiture.Core.Models.Voiture>
 
 @{
     ViewData["Title"] = "Accueil";
@@ -44,4 +64,25 @@
             </div>
         </div>
     }
+    <nav aria-label="Pagination">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(ViewBag.PageActuelle == 1 ? "disabled" : "")">
+                <a class="page-link"
+                   asp-route-page="@(ViewBag.PageActuelle - 1)"
+                   asp-route-recherche="@ViewBag.RechercheActuelle"
+                   asp-route-tri="@ViewBag.TriActuel">Précédent</a>
+            </li>
+
+            <li class="page-item disabled">
+                <span class="page-link">Page @ViewBag.PageActuelle sur @ViewBag.TotalPages</span>
+            </li>
+
+            <li class="page-item @(ViewBag.PageActuelle == ViewBag.TotalPages ? "disabled" : "")">
+                <a class="page-link"
+                   asp-route-page="@(ViewBag.PageActuelle + 1)"
+                   asp-route-recherche="@ViewBag.RechercheActuelle"
+                   asp-route-tri="@ViewBag.TriActuel">Suivant</a>
+            </li>
+        </ul>
+    </nav>
 </div>
